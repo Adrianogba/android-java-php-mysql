@@ -3,8 +3,8 @@ package io.github.adrianogba.crud_java;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -95,21 +95,15 @@ public class MainActivity extends AppCompatActivity {
                 // Display the first 500 characters of the response
                 // string.
 
-
                 try{
 
-                    JsonArray mJson = (JsonArray) jsonParser
-                            .parse(response);
+                    JsonArray mJson = (JsonArray) jsonParser.parse(response);
 
                     veiculosList = new ArrayList<>();
 
-
                     for (int i = 0; i < mJson.size(); i++) {
-                        Veiculo object = gson.fromJson(mJson.get(i),
-                                Veiculo.class);
+                        Veiculo object = gson.fromJson(mJson.get(i), Veiculo.class);
                         veiculosList.add(object);
-
-
                     }
 
                     VeiculoListAdapter veiculoListAdapter = new VeiculoListAdapter(MainActivity.this,veiculosList);
@@ -134,18 +128,14 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 progressDialog.cancel();
                 swipeRefresh.setRefreshing(false);
-                Toast.makeText(MainActivity.this,
-                        "Problema na comunicação com o servidor!",
-                        Toast.LENGTH_LONG).show();
-
+                Toast.makeText(MainActivity.this, "Problema na comunicação com o servidor!", Toast.LENGTH_LONG).show();
             }
 
         }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<>();
                 params.put("PATH", "getVeiculos");
-
 
                 return params;
             };
@@ -154,7 +144,5 @@ public class MainActivity extends AppCompatActivity {
 
         queue.add(stringRequest);
     }
-
-
 
 }

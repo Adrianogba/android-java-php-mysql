@@ -4,8 +4,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -184,7 +184,7 @@ public class AddVeiculo extends AppCompatActivity {
                 dt_cadastro=bundle.getString("dt_cadastro");
 
                 ehnovo=bundle.getString("ehnovo");
-                if(ehnovo=="1"){
+                if(ehnovo.equals("1")){
                     txtehnovo.setText("Novo");
 
                 }else{
@@ -192,7 +192,7 @@ public class AddVeiculo extends AppCompatActivity {
                 }
             }
 
-        }catch (Exception e){}
+        } catch (Exception ignored){}
 
     }
 
@@ -203,7 +203,7 @@ public class AddVeiculo extends AppCompatActivity {
                 || ano.getText().toString().trim().equalsIgnoreCase("")
                 || preco.getText().toString().trim().equalsIgnoreCase("")
                 || descricao.getText().toString().trim().equalsIgnoreCase("")
-                || ehnovo=="-1"
+                || ehnovo.equals("-1")
                 ){
             Toast.makeText(this, "Preencha todo o formulário.", Toast.LENGTH_SHORT).show();
             return false;
